@@ -14,7 +14,7 @@ const cats = [
     age: '4',
     weight: '11',
     owner: '2',
-    filename: 'http://placekitten.com/400/302',
+    filename: 'http://placekitten.com/400/305',
   },
 ];
 
