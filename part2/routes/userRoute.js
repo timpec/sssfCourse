@@ -1,6 +1,8 @@
 'use strict';
 //userRoute
 const express = require('express');
+const multer = require('multer')
+const upload = multer()
 const router = express.Router();
 const userController = require('../controllers/userController');
 
@@ -8,12 +10,10 @@ router.get('/', userController.user_list_get);
 
 router.get('/:id', userController.user_get);
 
-/* router.get('/:id', (req, res) => {
-    res.send('user id parameter', req.params.id)
-}); 
-*/
   
-router.post('/', (req, res) => {
+router.post('/', upload.array(), (req, res) => {
+    console.log( req.body)
+    res.json(req.body);
     res.send('Post');
 });
 

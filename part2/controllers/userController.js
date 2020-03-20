@@ -9,7 +9,7 @@ const user_list_get = (req, res) => {
 
 const user_get = (req, res) => {
     // Get user by id
-    console.log('user id parameter', req.params.id);
+    // console.log('user id parameter', req.params.id);
     const user = users.filter(user => user.id === req.params.id).pop();
     res.json(user);
 }
