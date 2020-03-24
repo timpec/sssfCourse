@@ -3,17 +3,22 @@
 const router = require('express').Router();
 const cat = require('../model/catModel');
 
+// Hardcoded for testing
 router.route('/')
   .post(async (req, res) => {
-    const cat = await cat.create({
-      name: "testCat", //req.body.name,
-      age: "2" //req.body.age,
+    const myCat = await cat.create({
+      name: "testCat2", //req.body.name,
+      age: "2", //req.body.age,
+      gender: "male",// String,
+      color: "green", // String,
+      weight: "1", //Number
+      owner: "5e7a7a1bbbd84b27bc9f2ef9"
     });
-    res.send(`Added cat: ${cat._name}`);
+    res.send(`Added cat: ${myCat.name}`);
   })
   .get(async (req, res) => {
     console.log("Cats..")
-    res.send(await cat.find());
+    res.send(await cat.find().populate('owner'));
   });
 
 /*

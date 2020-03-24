@@ -5,7 +5,10 @@ const Schema = mongoose.Schema;
 const catSchema = new Schema({
   name:  String,
   age: Number,
-  owner: mongoose.ObjectId
+  gender: String,
+  color: String,
+  weight: Number,
+  owner: { type: mongoose.ObjectId, ref: 'User' }
 });
 
 module.exports = mongoose.model('Cat', catSchema);
