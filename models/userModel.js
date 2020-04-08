@@ -1,39 +1,27 @@
 'use strict';
-const users = [
-  {
-    id: '1',
-    name: 'John Doe',
-    email: 'john@metropolia.fi',
-    password: '1234',
-  },
-  {
-    id: '2',
-    name: 'Jane Doez',
-    email: 'jane@metropolia.fi',
-    password: 'qwer',
-  },
-];
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const getUser = (id) => {
-  const user = users.filter((usr) => {
-    if (usr.id === id) {
-      return usr;
-    }
-  });
-  return user[0];
-};
+const userModel = new Schema({
+  //TODO: schema
+  username:  String,
+  password: String
+});
 
-const getUserLogin = (email) => {
-  const user = users.filter((usr) => {
-    if (usr.email === email) {
-      return usr;
-    }
-  });
-  return user[0];
+const getUserLogin = async (params) => {
+  try {
+    console.log("B", params);
+    const [user] = await userModel.find({username: params})
+    console.log("T", user)
+    return user;
+  } 
+  catch (e) {
+    console.log('error', e.message);
+  }
 };
 
 module.exports = {
-  users,
-  getUser,
+  //users,
+  //getUser,
   getUserLogin,
 };

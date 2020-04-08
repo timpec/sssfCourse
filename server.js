@@ -9,13 +9,21 @@ const authRoute = require('./routes/authRoute');
 const passport = require('./utils/pass');
 const cors = require('cors');
 //const bodyParser = require('body-parser');
-
+const helmet = require('helmet');
 const app = express();
+
+app.use(helmet());
 
 app.use(cors());
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+if (process.env.NODE_ENV === 'production') {
+  require('./production')(app);
+} else {
+  require('./localhost')(app, process.env.HTTPS_PORT, process.env.HTTP_PORT);
+}
 
 // dummy function to set user (irl: e.g. passport-local)
 const auth = (req, res, next) => {
@@ -45,5 +53,7 @@ app.use(
       })(req, res);
     });
 
-app.listen(3000);
-console.log("App listening on port 3000")
+app.get('/', (req, res) => {
+  res.send('Hello Secure World!');
+});
+
