@@ -6,6 +6,7 @@ const graphqlHTTP = require('express-graphql');
 const MyGraphQLSchema = require('./schema/schema');
 const db = require('./db/db');
 const authRoute = require('./routes/authRoute');
+const userRoute = require('./routes/userRoute');
 const passport = require('./utils/pass');
 const cors = require('cors');
 //const bodyParser = require('body-parser');
@@ -43,6 +44,7 @@ const checkAuth = (req, res) => {
 //app.post(auth);
 
 app.use('/auth', authRoute);
+app.use('/user', userRoute);
 
 app.use(
     '/graphql', (req, res) => {

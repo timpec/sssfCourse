@@ -4,10 +4,12 @@ const Schema = mongoose.Schema;
 
 const userModel = new Schema({
   //TODO: schema
-  username:  String,
+  name:  String,
+  email: String,
   password: String
 });
 
+/*
 const getUserLogin = async (params) => {
   try {
     console.log("B", params);
@@ -19,9 +21,7 @@ const getUserLogin = async (params) => {
     console.log('error', e.message);
   }
 };
+*/
 
-module.exports = {
-  //users,
-  //getUser,
-  getUserLogin,
-};
+
+module.exports = mongoose.model('User', userModel);

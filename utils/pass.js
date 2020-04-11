@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 passport.use(new Strategy(
     async (username, password, done) => {
       try {
-        const user = await userModel.getUserLogin(username);
+        const user = await userModel.findOne({name: username});
         console.log('Local strategy', user); // result is binary row
         if (user === undefined) {
           return done(null, false, {message: 'Incorrect email.'});
@@ -36,9 +36,10 @@ passport.use(new JWTStrategy({
     (jwtPayload, done) => {
       console.log('payload', jwtPayload);
       //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
-      const user = userModel.getUser(jwtPayload.id);
+      const user = userModel.findById(jwtPayload.id);
       console.log('pl user', user);
       if (user) {
+        delete user.password
         return done(null, user);
       } else {
         return done(null, false);
