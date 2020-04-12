@@ -8,20 +8,28 @@ const io = require('socket.io')(http);
 app.use(express.static('public'));
 
 io.on('connection', (socket) => {
+  socket.join('General');
   console.log('a user connected', socket.id);
 
   socket.on('disconnect', () => {
     console.log('a user disconnected', socket.id);
   });
 
-  socket.on('chat message', (msg) => {
-    console.log('message: ', msg);
-    io.emit('chat message', msg);
-});
+  socket.on('join', params => {
+    //console.log(params)
+    socket.join(params.room)
+    io.sockets.in(params.room).emit('chat message', params.chatter + " joined room: " + params.room)    
+  })
 
-  socket.on('room message', (msg) => {
-    console.log('private message: ', msg);
-    io.in('priva').emit('room message', msg);
+  socket.on('leave', params => {
+    //console.log(params)
+    socket.leave(params.room)
+    io.sockets.in(params.room).emit('chat message', params.chatter + " left room: " + params.room)    
+  })
+
+  socket.on('chat message', (msg) => {
+    console.log('message in room: ', msg.room," =>" + msg.message );
+    io.sockets.in(msg.room).emit('chat message', msg.message);
   });
 });
 
