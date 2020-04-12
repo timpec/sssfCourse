@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket Task</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+      <div>
+      <form action="" id="name">
+        <input id="n" autocomplete="off" placeholder="Select chatting name">
+        <button>Use</button> 
+      </form>
+    </div>
+    <ul id="messages"></ul>
+    <form action="" id="message">
+      <input id="m" autocomplete="off" placeholder="Type your message here!">
+      <button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chat.js"></script>
+  </body>
+</html>
