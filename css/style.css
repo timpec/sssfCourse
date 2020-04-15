@@ -1,0 +1,35 @@
+@font-face {
+    font-family: rubik;
+    src: url(../css/Rubik-Regular.ttf)
+}
+
+body {
+    font-family: rubik;
+  }
+  
+  /* Make content area fill the entire browser window */
+  html,
+  .fullscreen {
+    display: flex;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-image: url(../images/bg.jpg);
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Center the content in the browser window */
+  .container {
+    margin: auto;
+    text-align: center;
+    width: 90%;
+    padding: 2em 5% 2em 5%;
+    position: absolute;
+    flex-direction: row;
+  }
+  
+  .title {
+    font-size: 3rem;
+  }
